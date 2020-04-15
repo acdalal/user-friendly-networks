@@ -37,6 +37,10 @@ def storeAllData(lines):
         else:
             if lineItemCount == 1:
                 addToQuestions(currPostID, item, questions)
+            elif lineItemCount == 2:
+                addToReplies(currPostID, item, answers)
+            elif lineItemCount == 3:
+                addToReplies(currPostID, item, comments)
             lineItemCount += 1
 
     return questions, answers, comments
@@ -52,7 +56,25 @@ def addToQuestions(postID, item, questions):
     '''
     if postID not in questions:
         questions[postID] = item
-    
+
+def addToReplies(postID, item, replies):
+    '''
+    adds the current post reply, unless it's a duplicate, to the replies dictionary.
+    A reply can be either an answer or a comment.
+    A comment can be by someone other than the original poster, or by the original poster.
+
+    PARAMETERS:
+        postID, the ID number associated with the post
+        item, the reply associated with the post ID
+        replies, the dictionary storing the replies. 
+    '''
+    if postID not in replies:
+        replies[postID] = [item]
+    else:
+        currentReplies = replies[postID]
+        if item not in currentReplies:
+            replies[postID].append(item)
+
 
 def cleanData(lines):
     '''
@@ -70,6 +92,7 @@ def cleanData(lines):
         cleanedEntry = removeCodeTags(entry)
         cleanedEntry = removeHTMLTags(cleanedEntry)
         cleanedEntry = removeEndlines(cleanedEntry)
+        cleanedEntry = removeTrailingSquareBracket(cleanedEntry)
         cleanedLines.append(cleanedEntry)
 
     return cleanedLines
@@ -101,6 +124,12 @@ def removeEndlines(str):
     cleanedStr = cleanedStr.replace('\\n', ' ')
     return cleanedStr
 
+def removeTrailingSquareBracket(str):
+    '''
+    Removes the trailing square bracket at the end of a comment, and returns the modified string.
+    '''
+    return str.replace(']', '')
+
 
 def main():
     if len(sys.argv) < 2:
@@ -113,6 +142,9 @@ def main():
     with open(outfileName, "w") as outfile:
         for line in cleanedLines:
             outfile.write(line)'''
+
+    #for item in cleanedLines:
+    #   print(item)
 
     questions, answers, comments = storeAllData(cleanedLines)
     print(questions)
