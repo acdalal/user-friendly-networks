@@ -9,6 +9,8 @@ This is the code repository for the User Friendly Networks research lab.
 
 - BackgroundReading: PDFs and citation information for the relevant background literature
 
+- Publications: All of the papers and posters we've published as part of this project.
+
 ## Who's here
 - Advisor and repo maintainer: Amy Csizmar Dalal
 - Current contributors: Rebecca Fox, Khalid Hussain
