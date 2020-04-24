@@ -10,6 +10,8 @@ creation date: 6 April 2020
 '''
 import re
 import sys
+from wordcloud import WordCloud
+
 # TODO: is there an HTML processing module so that we don't have to use regex to remove tags?
 
 def storeAllData(lines):
@@ -44,6 +46,38 @@ def storeAllData(lines):
             lineItemCount += 1
 
     return questions, answers, comments
+
+def generateWordCloud(dict, imgFile="results.png"):
+    '''
+    Generates a word cloud from a subset of the post data (questions, answers, or comments)
+
+    PARAMETERS:
+        dict, a dictionary whose values contain the source text for the wordcloud
+        imgFile, the name of the file to store the word cloud (default: results.png)
+    '''
+    data = extractTextFromDictValues(dict)
+
+    # Create the cloud and save it to a file
+    cloud = WordCloud().generate(data)
+    cloud.to_file(imgFile)
+
+    
+def extractTextFromDictValues(dict):
+    '''
+    Convert dictionary values to string, and return the string
+    '''
+    dataItems = list(dict.values())
+
+    if isinstance(dataItems[0], str):
+        data = "".join(dataItems)
+    else:
+        # need to convert each data item from list to string separately, and append
+        data = ""
+        for item in dataItems:
+            temp = "".join(item)
+            data = data + temp
+
+    return data
 
 def addToQuestions(postID, item, questions):
     '''
@@ -147,9 +181,14 @@ def main():
     #   print(item)
 
     questions, answers, comments = storeAllData(cleanedLines)
-    print(questions)
-    print(answers)
-    print(comments)
+    #print(questions)
+    #print(answers)
+    #print(comments)
+
+    # generate word clouds
+    #generateWordCloud(questions, "questions.png")
+    #generateWordCloud(answers, "answers.png")
+    generateWordCloud(comments, "comments.png")
 
 if __name__ == '__main__':
     main()
