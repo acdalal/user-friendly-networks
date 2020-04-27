@@ -186,8 +186,8 @@ def main():
     #print(comments)
 
     # generate word clouds
-    #generateWordCloud(questions, "questions.png")
-    #generateWordCloud(answers, "answers.png")
+    generateWordCloud(questions, "questions.png")
+    generateWordCloud(answers, "answers.png")
     generateWordCloud(comments, "comments.png")
 
 if __name__ == '__main__':
