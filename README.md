@@ -9,7 +9,11 @@ This is the code repository for the User Friendly Networks research lab.
 
 - BackgroundReading: PDFs and citation information for the relevant background literature
 
+- MeetingNotes: Records of our research team meetings: discussion, to dos, etc.
+
 - Publications: Posters and papers we've published coming out of this work. Note that papers in progress are on Overleaf.
+
+Our Project board contains the current tasks in progress.
 
 ## Who's here
 - Advisor and repo maintainer: Amy Csizmar Dalal
