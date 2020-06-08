@@ -15,6 +15,8 @@ This is the code repository for the User Friendly Networks research lab.
 
 Our Project board contains the current tasks in progress.
 
+Our Wiki lists our weekly priorities and any other random notes that should go "somewhere".
+
 ## Who's here
 - Advisor and repo maintainer: Amy Csizmar Dalal
 - Current contributors: Rebecca Fox, Khalid Hussain
